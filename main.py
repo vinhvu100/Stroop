@@ -12,6 +12,8 @@ from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 
+from kivy.core.audio import SoundLoader
+
 class StroopGame(Screen):
     #RGBA values
     red = [200, 0, 0, .8]
@@ -228,11 +230,8 @@ class Menu(Screen):
     
 class HowToPlay(Screen):
     pass
-
-class GameOver(Screen):
-    final_score = ObjectProperty(None)
     
-class Ad(Popup):
+class GameOver(Popup):
     final_score = ObjectProperty(None)
     
 class stroopApp(App):
@@ -245,14 +244,13 @@ class stroopApp(App):
         self.menu = Menu(name='menu')
         self.game = StroopGame(name='game')
         self.how_to_play = HowToPlay(name='how_to_play')
-        self.game_over = GameOver(name='game_over')
-        
-        self.ad = Ad()
         
         self.sm.add_widget(self.menu)
         self.sm.add_widget(self.how_to_play)
         self.sm.add_widget(self.game)
-        self.sm.add_widget(self.game_over)
+        
+        #sound = SoundLoader.load('justin_bieber.mp3')
+        #sound.play()
         
         return self.sm
 
@@ -266,16 +264,16 @@ class stroopApp(App):
     def Timer(self, instance):
         if (self.time + 3 == 0):
             Clock.unschedule(self.Timer)
-            self.sm.current = 'game_over'
-            self.game_over.final_score.text = 'Final score: %r' %self.game.Score
+            self.popup()            
         self.time -= 1
     
     def go_to_menu(self):
         self.sm.current = 'menu'
     
     def popup(self):
-        ad = Ad()
-        ad.open()
+        game_over_ad = GameOver()
+        game_over_ad.final_score.text = 'Final score: %r' %self.game.Score
+        game_over_ad.open()
         
 if __name__ == '__main__':
     stroopApp().run()

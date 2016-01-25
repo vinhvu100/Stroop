@@ -90,70 +90,27 @@
             text: 'Menu'
             on_touch_down:
                 root.manager.current = 'menu'
+
                 
 <GameOver>:
-    final_score: f
-    FloatLayout:
-        Label:
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 0, .9
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-                    
-            color: [0,0,0,1]
-            id: f
-            text: 'score'
-            size_hint: .25, .15
-            pos_hint: {'x':.37, 'y':.75}
-    
-        Button:
-            background_color: [0,0,255,.6]
-            size_hint: .25, .25
-            pos_hint: {'x':.37, 'y':.35}
-            text: 'Menu'
-            
-            on_press:
-                root.manager.current = 'menu'
-            
-        Button:
-            background_color: [0,0,255,.6]
-            size_hint: .25, .25
-            pos_hint: {'x':.37, 'y':.05}
-            text: 'Play Again'
-            
-            on_press:
-                app.start_game()
-                
-<Ad>:
     final_score: f
     title: 'Pop up'
     BoxLayout:
         orientation: 'vertical'
-        Label:
-            canvas.before:
-                Color:
-                    rgba: 0, 1, 0, .9
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+        Button:
+            background_color: 255, 0, 0, .9
             id: f
             text: 'Score'
-        Label:
-            canvas.before:
-                Color:
-                    rgba: 0, 0, 1, .9
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
+        Button:
+            background_color: 0, 0, 255, .9
             text: 'Play Again'
-            on_touch_down:
+            on_press:
                 app.start_game()
                 root.dismiss()
         Button:
+            background_color: 0, 255, 0, .9
             text: 'Menu'
-            on_touch_down:
+            on_press:
                 app.go_to_menu()
                 root.dismiss()
                 

@@ -1,10 +1,8 @@
 # Stroop
 
-Mini game based on the stroop effect
+Only using this to pass code back and forth
 
 To do:
-
--Created Pop up layout, need to be implemented
 
 -Bind 'escape' to pop up screen
 	
