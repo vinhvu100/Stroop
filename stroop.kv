@@ -65,16 +65,24 @@
             background_color: [0,0,255,.6]
             text: 'Play'
             size_hint: .25, .25
-            pos_hint: {'x':.37, 'y':.55}
+            pos_hint: {'x':.37, 'y':.65}
             on_press:
                 app.start_game()
+                app.play_music()
         Button:
             background_color: [0,0,255,.6]
             text: 'How to play'
             size_hint: .25, .25
-            pos_hint: {'x':.37, 'y':.2}
+            pos_hint: {'x':.37, 'y':.3}
             on_press:
                 root.manager.current = 'how_to_play'
+        Button:
+            background_color: [0,0,255,.6]
+            text: 'Settings'
+            size_hint: .25, .15
+            pos_hint: {'x':.37, 'y':.1}
+            on_press:
+                root.manager.current = 'setting'
                 
 <HowToPlay>:
     FloatLayout:
@@ -91,6 +99,17 @@
             on_touch_down:
                 root.manager.current = 'menu'
 
+
+<Setting>:
+    BoxLayout:
+        
+        Button:
+            text: 'setting menu'
+        Button:
+            text: 'back'
+            
+            on_press:
+                root.manager.current = 'menu'
                 
 <GameOver>:
     final_score: f

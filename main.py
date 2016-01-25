@@ -1,3 +1,6 @@
+import os
+import sys
+
 import kivy
 from kivy.uix.screenmanager import ScreenManager, Screen, WipeTransition
 from kivy.app import App
@@ -230,6 +233,9 @@ class Menu(Screen):
     
 class HowToPlay(Screen):
     pass
+
+class Setting(Screen):
+    pass
     
 class GameOver(Popup):
     final_score = ObjectProperty(None)
@@ -237,23 +243,34 @@ class GameOver(Popup):
 class stroopApp(App):
     
     time = 5
+    music_on = False
     
     def build(self):
+        self.data_path = os.path.realpath(os.path.dirname(sys.argv[0])) + os.sep + "all_audio" + os.sep
+    
         self.sm = ScreenManager(transition=WipeTransition())
     
         self.menu = Menu(name='menu')
         self.game = StroopGame(name='game')
         self.how_to_play = HowToPlay(name='how_to_play')
+        self.setting = Setting(name='setting')
         
         self.sm.add_widget(self.menu)
         self.sm.add_widget(self.how_to_play)
         self.sm.add_widget(self.game)
-        
-        #sound = SoundLoader.load('justin_bieber.mp3')
-        #sound.play()
+        self.sm.add_widget(self.setting)
         
         return self.sm
 
+    def play_music(self):
+        if (self.music_on == False):
+        
+            sound = SoundLoader.load(self.data_path + 'audio2.mp3')
+            sound.loop = True
+            sound.volume = .5
+            sound.play()
+            self.music_on = True
+        
     def start_game(self):
         self.time = 5
         self.sm.current = 'game'
